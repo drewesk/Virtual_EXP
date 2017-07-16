@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>React Basics</title>
+
+    <link rel="stylesheet" href="./index.css"/>
+
+    <style>
+      canvas { width: 40%; height: 40%; }
+		</style>
+
+</head>
+<body>
+
+  <div id="appRoot"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/86/three.min.js"></script>
+
+  <script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+
+    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    const cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
+
+    camera.position.z = 5;
+
+    const animate = function () {
+      requestAnimationFrame( animate );
+
+      cube.rotation.x += 0.1;
+      cube.rotation.y += 0.1;
+
+      renderer.render(scene, camera);
+    };
+
+    animate();
+  </script>
+
+  <script src="/app/bundle.js"></script>
+</body>
+</html>
+
+<!-- heroku deploy first with 'react decoupled server', recommendation from a classmate -->
