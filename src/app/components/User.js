@@ -24,17 +24,18 @@ export class User extends React.Component {
     return(
       <div className="user-content">
         <p>
-          Hello { this.props.name }, you are { this.state.age } old! <br/>
+          Hello { this.props.name }, you are { this.state.age } years old! <br/>
           Status: { this.state.status }
         </p>
+
+        <hr/>
+        
         <button onClick={ this.onMakeOlder.bind(this) }>Age++</button>
         <p>
           { this.props.user.name } likes { this.props.user.hobbies
             .map((hobby, index) =>
               <li key={ index }>{ hobby }</li>) }
         </p>
-        <hr/>
-          { this.props.children }
       </div>
     );
   }
@@ -43,6 +44,5 @@ export class User extends React.Component {
 User.propTypes = {
   name: React.PropTypes.string,
   baseAge: React.PropTypes.number,
-  user: React.PropTypes.object,
-  children: React.PropTypes.element.isRequired
+  user: React.PropTypes.object
 };

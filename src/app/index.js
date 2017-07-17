@@ -7,6 +7,23 @@ import { Articles } from "./components/Articles";
 import { User } from "./components/User";
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      homeLink: "Home"
+    };
+  }
+
+  onGreet() {
+    alert('This test is working.');
+  }
+
+  onChangeLinkName(name) {
+    this.setState({
+      homeLink: name
+    });
+  }
+
   render() {
 
     const user = {
@@ -16,10 +33,14 @@ class App extends React.Component {
 
     return (
       <div className=".App">
-        <Header homeLink="Home"/>
-        <Home/>
+        <Header homeLink={ this.state.homeLink }/>
+        <Home greet={ this.onGreet }
+              changeLink={ this.onChangeLinkName.bind(this) }
+              initialLinkName={ this.state.homeLink }/>
         <Articles/>
-        <User name={ "Andrew" } baseAge={ 24 } user={ user }>
+        <User name={ "Andrew" }
+              baseAge={ 24 }
+              user={ user }>
           <p>This is a test!</p>
           <p>This is a test!</p>
           <p>This is a test!</p>
