@@ -1,15 +1,14 @@
-import React from 'react';
+import React from "react";
 
-export class Header extends React.Component {
-  render() {
+export const Header = (props) => {// stateless Component
     return(
-      <nav className=''>
+      <nav className="">
         <div>
           <div>
-            <h3 className="App-header ">This is the Header</h3>
+            <h3 className="App-header ">EXP-Animate</h3>
+            <a href="#">{ props.homeLink }</a>
           </div>
         </div>
       </nav>
     );
-  }
-}
+  };
