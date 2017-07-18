@@ -10,7 +10,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      homeLink: "Home"
+      homeLink: "Home",
+      homeMounted: true
     };
   }
 
@@ -24,6 +25,12 @@ class App extends React.Component {
     });
   }
 
+  onChangeHomeMounted() {
+    this.setState({
+      homeMounted: !this.state.homeMounted
+    });
+  }
+
   render() {
 
     const user = {
@@ -31,12 +38,24 @@ class App extends React.Component {
       hobbies: ["Running", "Art", "Traveling"]
     };
 
+    let homeComponent = "";
+    if(this.state.homeMounted) {
+      homeComponent = (
+            <Home greet={ this.onGreet }
+            changeLink={ this.onChangeLinkName.bind(this) }
+            initialLinkName={ this.state.homeLink }
+            /> 
+          );
+    }
     return (
       <div className=".App">
         <Header homeLink={ this.state.homeLink }/>
-        <Home greet={ this.onGreet }
-              changeLink={ this.onChangeLinkName.bind(this) }
-              initialLinkName={ this.state.homeLink }/>
+        <div className="home-component">
+          { homeComponent }
+        </div>
+        <div className="home-component-button">
+          <button onClick={ this.onChangeHomeMounted.bind(this) }>(Un)Mount Home Component</button>
+        </div>
         <Articles/>
         <User name={ "Andrew" }
               baseAge={ 24 }

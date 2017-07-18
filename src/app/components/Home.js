@@ -4,8 +4,47 @@ export class Home extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      homeLink: props.initialLinkName
-    }
+      homeLink: props.initialLinkName,
+      status: 0
+    };
+    setTimeout(() => {
+      this.setState({
+        status: 1
+      });
+    }, 3000);
+    console.log("Constructor");
+  }
+
+  componentWillMount() {
+    console.log("Component will mount");
+  }
+
+  componentDidMount() {
+    console.log("Component did mount");
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("Component will receive props", nextProps);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("Should Component update", nextProps, nextState);
+      // if(nextState.status === 1) {
+      //   return false;
+      // }
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log("Component will update", nextProps, nextState);
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    console.log("Component did update", prevProps, prevState);
+  }
+
+  componentWillUnmount() {
+    console.log("Component will unmount");
   }
 
   onChangeLink() {
@@ -31,12 +70,18 @@ export class Home extends React.Component {
           <p className="App-intro">
             Welcome to the home-page, { content }
           </p>
-    
+
           <hr/>
 
           <button onClick={ this.props.greet }>
             Greet
           </button>
+
+          <hr/>
+
+          <p>
+            Status: { this.state.status }
+          </p>
 
           <hr/>
 
